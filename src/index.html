@@ -5,14 +5,548 @@
     <meta charset="UTF-8">
     <title>DjStore</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <div class="wrapper">
-        <h2>
-            Заг
+    <div class="leaders">
+        <h2 class="leaders__title">
+            Our Brave, Fearless Leaders
         </h2>
+        <p class="leaders__subtitle">
+            Every good ship needs experienced adventurers with vision and skill. Our <br> swashbuckling leaders are all
+            industry veterans and pioneers, just the people you want <br> to deftly chart your course through the shoals
+            of
+            the gaming seas.
+        </p>
+        <div class="leaders__slider">
+            <!-- Slider main container -->
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="leaders-btn-wrap">
+                <button type="button" class="leaders-btn-prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23.904" height="18" viewBox="0 0 23.904 18">
+                        <path id="left"
+                            d="M10.477,0A7,7,0,0,1,9,.184,6.992,6.992,0,0,1,7.523,0h0C7.057,2.665,5.064,4.771,3.473,6.069A19.62,19.62,0,0,1,1.031,7.76c-.332.194-.6.339-.773.426l-.2.1L.04,8.3.027,8.3l-.019.009L0,8.314S.273,8.9.653,9.728c.6,1.3.651,1.412.653,1.414l0,0,.008,0,.023-.011.008,0,.069-.034c.05-.024.136-.066.267-.133.3-.155.61-.326.92-.507A22.416,22.416,0,0,0,5.442,8.483,19.088,19.088,0,0,0,7.1,6.959a6.446,6.446,0,0,0,.977-1.293,10.028,10.028,0,0,1-.558,1.293L7.5,23.9h3L10.477,6.959a10.028,10.028,0,0,1-.558-1.293A6.457,6.457,0,0,0,10.9,6.959a19.088,19.088,0,0,0,1.662,1.524A22.416,22.416,0,0,0,15.4,10.449c.31.181.619.352.92.507.131.067.217.109.267.133l.069.034.008,0,.023.011.008,0,0,0s.054-.115.653-1.414c.38-.825.65-1.409.653-1.414l-.008,0L17.973,8.3,17.96,8.3l-.015-.007-.2-.1c-.169-.087-.441-.232-.773-.426a19.62,19.62,0,0,1-2.442-1.691c-1.591-1.3-3.584-3.4-4.049-6.069Z"
+                            transform="translate(0 18) rotate(-90)" fill="#fff" />
+                    </svg>
+                </button>
+                <button type="button" class="leaders-btn-next">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23.904" height="18" viewBox="0 0 23.904 18">
+                        <path id="right"
+                            d="M10.477,23.9A7,7,0,0,0,9,23.719a6.992,6.992,0,0,0-1.477.184h0c-.465-2.665-2.459-4.771-4.049-6.069a19.62,19.62,0,0,0-2.442-1.691C.7,15.95.427,15.8.258,15.718l-.2-.1L.04,15.609.027,15.6l-.019-.009L0,15.59S.273,15,.653,14.176c.6-1.3.651-1.412.653-1.414l0,0,.008,0,.023.011.008,0,.069.034c.05.024.136.066.267.133.3.155.61.326.92.507a22.416,22.416,0,0,1,2.839,1.966A19.088,19.088,0,0,1,7.1,16.945a6.446,6.446,0,0,1,.977,1.293,10.028,10.028,0,0,0-.558-1.293L7.5,0h3l-.024,16.945a10.028,10.028,0,0,0-.558,1.293,6.457,6.457,0,0,1,.977-1.293,19.088,19.088,0,0,1,1.662-1.524A22.416,22.416,0,0,1,15.4,13.455c.31-.181.619-.352.92-.507.131-.067.217-.109.267-.133l.069-.034.008,0,.023-.011.008,0,0,0s.054.115.653,1.414c.38.825.65,1.409.653,1.414l-.008,0-.019.009-.013.006-.015.007-.2.1c-.169.087-.441.232-.773.426a19.62,19.62,0,0,0-2.442,1.691c-1.591,1.3-3.584,3.4-4.049,6.069Z"
+                            transform="translate(0 18) rotate(-90)" fill="#fff" />
+                    </svg>
+
+                </button>
+            </div>
+        </div>
+
     </div>
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+
+    </script>
+    <script>
+
+    </script>
 </body>
 
 </html>
