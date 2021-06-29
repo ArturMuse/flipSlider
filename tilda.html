@@ -1,0 +1,170 @@
+<script>
+    const METHOD_ZONE_ONE = 'Доставка в ЗОНУ 1 — 150 ₽, от 1000 ₽ бесплатно';
+    const METHOD_ZONE_TWO = 'Доставка в ЗОНУ 2 — 200 ₽, от 1200 ₽ бесплатно';
+    const METHOD_ZONE_THREE = 'Доставка в ЗОНУ 3 — 250 ₽, от 2000 ₽ бесплатно';
+    const METHOD_TAKE_AWAY = 'Самовывоз — скидка 10% от 1000 ₽';
+
+    let deliveryRadio = $('[name="Доставка"]');
+    //   let birthdayCheckbox = $('[name="День рождения"]');
+
+
+    const addFakeDiscount = function (discountAmount, discountedPrice) {
+        window.tcart.promocode = {
+            message: 'OK',
+            promocode: 'САМОВЫВОЗ',
+            discountpercent: '10.00'
+        }
+
+        window.tcart.prodamount_discountsum = discountAmount.toFixed(1);
+        window.tcart.prodamount_withdiscount = discountedPrice;
+    }
+
+    const removeFakeDiscount = function () {
+        delete window.tcart.prodamount_discountsum;
+        delete window.tcart.prodamount_withdiscount;
+        delete window.tcart.promocode;
+    }
+
+    const checkPromocodeLabel = function () {
+        let cartInfoValue = $('.t706__cartwin-totalamount-info_value');
+
+        cartInfoValue.each(function () {
+            if ($(this).text().includes('САМОВЫВОЗ')) {
+                $(this).hide();
+                $(this).prev().hide();
+                $(this).prev().prev().hide();
+            }
+        });
+    }
+
+
+    const checkDeliveryMethod = function () {
+        let chosenDeliveryMethod = $('[name="Доставка"]:checked');
+
+        if (chosenDeliveryMethod.val() == METHOD_ZONE_ONE) {
+            chosenDeliveryMethod.attr('data-delivery-price', 150);
+            chosenDeliveryMethod.closest('.t-radio__wrapper-delivery').attr('data-delivery-free', 1000);
+            removeFakeDiscount();
+        } else if (chosenDeliveryMethod.val() == METHOD_ZONE_TWO) {
+            chosenDeliveryMethod.attr('data-delivery-price', 200);
+            chosenDeliveryMethod.closest('.t-radio__wrapper-delivery').attr('data-delivery-free', 1200);
+            removeFakeDiscount();
+        } else if (chosenDeliveryMethod.val() == METHOD_ZONE_THREE) {
+            chosenDeliveryMethod.attr('data-delivery-price', 250);
+            chosenDeliveryMethod.closest('.t-radio__wrapper-delivery').attr('data-delivery-free', 2000);
+            removeFakeDiscount();
+        } else if (chosenDeliveryMethod.val() == METHOD_TAKE_AWAY) {
+            if (window.tcart.prodamount >= 1000) {
+                if (window.tcart.delivery) {
+                    addFakeDiscount((window.tcart.prodamount / 100) * 5, window.tcart.prodamount - ((window.tcart.prodamount / 100) * 5));
+                    if (window.tcart.delivery.freedl > window.tcart.prodamount) {
+                        window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5 + window.tcart.delivery.price;
+                    } else {
+                        window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5;
+                    }
+                } else {
+                    addFakeDiscount((window.tcart.prodamount / 100) * 5, window.tcart.prodamount - ((window.tcart.prodamount / 100) * 5));
+                    window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5;
+                }
+            } else {
+                removeFakeDiscount();
+            }
+
+            delete window.tcart.delivery;
+        } else {
+            delete window.tcart.delivery;
+            removeFakeDiscount();
+        }
+        setTimeout(function () {
+            tcart__reDrawTotal();
+            tcart__updateDelivery();
+        }, 100)
+
+        setTimeout(function () {
+            checkPromocodeLabel();
+        }, 110);
+    }
+
+    //   const checkBirthdayCheckbox = function() {
+    //     let chosenDeliveryMethod = $('[name="Доставка"]:checked');
+
+    //     if (birthdayCheckbox.is(':checked')) {
+    //       if (window.tcart.delivery) {
+    //         addFakeDiscount((window.tcart.prodamount / 100) * 5, window.tcart.prodamount - ((window.tcart.prodamount / 100) * 5));
+    //         if (window.tcart.delivery.freedl > window.tcart.prodamount) {
+    //           window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5 + window.tcart.delivery.price;
+    //         } else {
+    //           window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5;
+    //         }
+    //       } else {
+    //         addFakeDiscount((window.tcart.prodamount / 100) * 5, window.tcart.prodamount - ((window.tcart.prodamount / 100) * 5));
+    //         window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5;
+    //       }
+    //     } else {
+    //       if (chosenDeliveryMethod.val() != METHOD_TAKE_AWAY) {
+    //         removeFakeDiscount();
+    //       }
+    //     }
+
+    //     setTimeout(function() {
+    //       tcart__reDrawTotal();
+    //       tcart__updateDelivery();
+    //     }, 100)
+
+    //     setTimeout(function() {
+    //       checkPromocodeLabel();
+    //     }, 110);
+    //   }
+
+    function tcart__addEvents__forProducts() {
+        $(".t706__product-plus").click(function () {
+            tcart__product__plus($(this))
+            checkDeliveryMethod();
+        }),
+            $(".t706__product-minus").click(function () {
+                tcart__product__minus($(this))
+                checkDeliveryMethod();
+            }),
+            $(".t706__product-del").click(function () {
+                tcart__product__del($(this))
+                checkDeliveryMethod();
+            }),
+            $(".t706__product-quantity").click(function () {
+                tcart__product__editquantity($(this))
+                checkDeliveryMethod();
+            })
+    }
+
+    function tcart__product__updateQuantity(t, r, o, a) {
+        a > 0 ? (void 0 !== window.tcart.products[o].inv && window.tcart.products[o].inv > 0 && a > window.tcart.products[o].inv && (alert(tcart__dict(13, "Sorry, limit reached, this is the maximum quantity of goods in stock")),
+            a = window.tcart.products[o].inv),
+            window.tcart.products[o].quantity = a,
+            window.tcart.products[o].amount = window.tcart.products[o].price * window.tcart.products[o].quantity,
+            window.tcart.products[o].amount = tcart__roundPrice(window.tcart.products[o].amount),
+            r.find(".t706__product-quantity").html(window.tcart.products[o].quantity),
+            "y" === window.tcart.products[o].single && void 0 !== window.tcart.products[o].portion && r.find(".t706__product-portion").html(tcart__showWeight(window.tcart.products[o].quantity * window.tcart.products[o].portion, window.tcart.products[o].unit)),
+            window.tcart.products[o].amount > 0 ? r.find(".t706__product-amount").html(tcart__showPrice(window.tcart.products[o].amount)) : r.find(".t706__product-amount").html("")) : tcart__product__del(t),
+            tcart__updateTotalProductsinCartObj(),
+            $(".t706__carticon-counter").html(window.tcart.total),
+            tcart__reDrawTotal(),
+            tcart__saveLocalObj(),
+            0 == a && tcart__reDrawProducts()
+        setTimeout(function () {
+            checkDeliveryMethod();
+        }, 200);
+    }
+
+
+    $(document).ready(function () {
+        deliveryRadio.on('change', checkDeliveryMethod);
+        // birthdayCheckbox.on('change', checkBirthdayCheckbox);
+    });
+
+</script>
+
+<style>
+    .t706__cartwin-totalamount-wrap,
+    .t706__cartwin-heading {
+        color: #000;
+    }
+</style>
