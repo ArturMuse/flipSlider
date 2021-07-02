@@ -1,170 +1,1295 @@
-<script>
-    const METHOD_ZONE_ONE = 'Доставка в ЗОНУ 1 — 150 ₽, от 1000 ₽ бесплатно';
-    const METHOD_ZONE_TWO = 'Доставка в ЗОНУ 2 — 200 ₽, от 1200 ₽ бесплатно';
-    const METHOD_ZONE_THREE = 'Доставка в ЗОНУ 3 — 250 ₽, от 2000 ₽ бесплатно';
-    const METHOD_TAKE_AWAY = 'Самовывоз — скидка 10% от 1000 ₽';
+<!DOCTYPE html>
+<html lang="en">
 
-    let deliveryRadio = $('[name="Доставка"]');
-    //   let birthdayCheckbox = $('[name="День рождения"]');
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-
-    const addFakeDiscount = function (discountAmount, discountedPrice) {
-        window.tcart.promocode = {
-            message: 'OK',
-            promocode: 'САМОВЫВОЗ',
-            discountpercent: '10.00'
+<body>
+    <!-- Стили -->
+    <style>
+        .leaders {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            background-color: #8220ed;
         }
 
-        window.tcart.prodamount_discountsum = discountAmount.toFixed(1);
-        window.tcart.prodamount_withdiscount = discountedPrice;
-    }
+        .leaders *,
+        .leaders *::before,
+        .leaders *::after {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            font-family: "Montseratt", sans-serif;
+        }
 
-    const removeFakeDiscount = function () {
-        delete window.tcart.prodamount_discountsum;
-        delete window.tcart.prodamount_withdiscount;
-        delete window.tcart.promocode;
-    }
+        .leaders__title {
+            text-align: center;
+            font-size: 50px;
+            font-weight: bolder;
+            line-height: 60px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
 
-    const checkPromocodeLabel = function () {
-        let cartInfoValue = $('.t706__cartwin-totalamount-info_value');
+        .leaders__subtitle {
+            color: #ffffff;
+            max-width: 700px;
+            margin: auto;
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 28px;
+        }
 
-        cartInfoValue.each(function () {
-            if ($(this).text().includes('САМОВЫВОЗ')) {
-                $(this).hide();
-                $(this).prev().hide();
-                $(this).prev().prev().hide();
+        .leaders__slider {
+            position: relative;
+            overflow-x: hidden;
+            max-width: 1160px;
+            margin: auto;
+            padding-top: 60px;
+        }
+
+        .leaders .container,
+        .leaders .flip-box,
+        .leaders .front,
+        .leaders .back {
+            width: 275px;
+            height: 444px;
+            border-radius: 16px;
+        }
+
+        .leaders .container,
+        .leaders .flip_box {
+            position: relative;
+        }
+
+        .leaders .front,
+        .leaders .back {
+            position: absolute;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .leaders .container {
+            -moz-transform: perspective(1200px);
+            -webkit-perspective: 1200px;
+            perspective: 1200px;
+        }
+
+        .leaders .flip_box {
+            -webkit-transition: all 0.5s ease-out;
+            transition: all 0.5s ease-out;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .leaders .front {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 40px 12.5px 50px 12.5px;
+            background-color: #6413bc;
+        }
+
+        .leaders .f_title {
+            padding-top: 33px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .leaders .f_subline {
+            max-width: 190px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin-top: 7px;
+            text-align: center;
+            height: 29px;
+        }
+
+        .leaders .f_social {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .leaders .f_social-link {
+            width: 50px;
+            height: 50px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            border: 1px solid #fff;
+            border-radius: 100px;
+            margin-right: 10px;
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .leaders .f_social-link:last-child {
+            margin-right: 0;
+        }
+
+        .leaders .f_social-link svg path {
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .leaders .f_social-link:hover {
+            border: 1px solid transparent;
+            background-color: #fff;
+        }
+
+        .leaders .f_social-link:hover svg path {
+            fill: #6413BC;
+        }
+
+        .leaders .f_btn {
+            cursor: pointer;
+            margin-top: 22px;
+            text-transform: uppercase;
+            font-size: 14px;
+            color: #fff;
+            font-weight: bold;
+            padding-bottom: 6px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            background: none;
+            -webkit-transition: border 0.3s ease;
+            transition: border 0.3s ease;
+        }
+
+        .leaders .f_btn_mobile {
+            display: none;
+        }
+
+        .leaders .f_btn:hover {
+            border-bottom: 1px solid transparent;
+        }
+
+        .leaders .back {
+            cursor: pointer;
+            padding: 30px 40px 40px 40px;
+            background-color: #6413bc;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+
+        .leaders .b_headline {
+            font-size: 20px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .leaders .b_subline {
+            margin-top: 5px;
+            font-size: 14px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 18px;
+        }
+
+        .leaders .b_text {
+            font-size: 12px;
+            color: #fff;
+            line-height: 24px;
+            margin-top: 17px;
+            max-width: 265px;
+            font-weight: 300;
+        }
+
+        .leaders .flipped {
+            -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+        }
+
+        .leaders .r_wrap {
+            position: absolute;
+            right: 40px;
+            bottom: 38px;
+        }
+
+        .leaders .f_img {
+            max-width: 250px;
+        }
+
+        .leaders .b_round,
+        .leaders .s_round {
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background-color: #d21849;
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+
+        .leaders .b_round {
+            opacity: 0;
+            background-color: #d21849;
+        }
+
+        .leaders .b_round_hover {
+            -webkit-transform: scale(1.37);
+            transform: scale(1.37);
+            opacity: 0.4;
+        }
+
+        .leaders .b_round_back_hover {
+            background-color: #f60044;
+        }
+
+        .leaders .s_round_click {
+            -webkit-transform: scale(1.7);
+            transform: scale(1.7);
+        }
+
+        .leaders .s_round_back {
+            background-color: #c30c3d;
+        }
+
+        .leaders .s_arrow {
+            width: 52px;
+            height: 52px;
+            background-image: url("https://img-fotki.yandex.ru/get/194549/29644339.5/0_d6c60_1d7815f0_orig");
+            background-color: transparent;
+            -webkit-transition: all 0.35s linear;
+            transition: all 0.35s linear;
+        }
+
+        .leaders .s_arrow_rotate {
+            -webkit-transform: rotate(-180deg);
+            transform: rotate(-180deg);
+        }
+
+        .leaders-btn-wrap {
+            max-width: 136px;
+            margin: auto;
+            margin-top: 25px;
+            padding-bottom: 65px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+
+        .leaders-btn-wrap button {
+            border: 1px solid #fff;
+            border-radius: 100px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            background-color: transparent;
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .leaders-btn-wrap button svg path {
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .leaders-btn-wrap button:hover {
+            border: 1px solid transparent;
+            background-color: #fff;
+        }
+
+        .leaders-btn-wrap button:hover svg path {
+            fill: #8220ED;
+        }
+
+        .leaders__popup {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s ease;
+        }
+
+        .leaders__popup-on {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .leaders__inner {
+            width: 100%;
+            height: 100%;
+            max-width: 1160px;
+            margin: auto;
+            height: 650px;
+            display: flex;
+            position: relative;
+        }
+
+        .leaders__box {
+            background: #6413BC;
+            padding: 70px 80px 70px 50px;
+        }
+
+        .leaders__box .f_social {
+            display: flex;
+            max-width: 180px;
+        }
+
+        .leaders__box-pic {
+            width: 253px;
+            height: 40px;
+            margin-bottom: 30px;
+        }
+
+        .leaders__box-img {
+            width: 100%;
+        }
+
+        .leaders__box-title {
+            font-weight: bold;
+            font-size: 30px;
+            line-height: 37px;
+            color: #FFFFFF;
+            margin-bottom: 5px;
+        }
+
+        .leaders__box-subtitle {
+            font-weight: 300;
+            font-size: 22px;
+            line-height: 27px;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+        }
+
+        .leaders__box-text {
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 140%;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+        }
+
+        .leaders__photo {
+            min-width: 440px;
+        }
+
+        .leaders__photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .leaders__popup-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        @media screen and (max-width: 1150px) {
+            .leaders__title {
+                font-size: 30px;
+                line-height: 35px;
+                text-align: left;
+                padding-left: 16px;
+                padding-right: 16px;
             }
-        });
-    }
+
+            .leaders__subtitle {
+                padding-left: 16px;
+                padding-right: 16px;
+                font-size: 14px;
+                line-height: 24px;
+                text-align: left;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .leaders .f_btn {
+                display: none;
+            }
+
+            .leaders .f_btn_mobile {
+                display: block;
+            }
+
+            .leaders__subtitle br {
+                display: none;
+            }
+
+            .leaders__slider {
+                padding-top: 50px;
+            }
+
+            .leaders .swiper-slide {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <!-- Подключение link -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Html -->
 
 
-    const checkDeliveryMethod = function () {
-        let chosenDeliveryMethod = $('[name="Доставка"]:checked');
+    <div class="leaders">
+        <div class="leaders__popup js-leaders-popup">
+            <div class="leaders__inner">
+                <button type="button" class="leaders__popup-close js-leaders-popup-close">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 1L1 17M17 17L1 1L17 17Z" stroke="#6413BC" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+                <div class="leaders__box">
+                    <div class="leaders__box-pic">
+                        <img src="http://ipic.su/img/img7/fs/logo.1625228047.png" alt="Logo" class="leaders__box-img">
+                    </div>
+                    <h3 class="leaders__box-title">
+                        Steven Huot
+                    </h3>
+                    <p class="leaders__box-subtitle">
+                        CEO
+                    </p>
+                    <p class="leaders__box-text">
+                        David is our quartermaster, he’s the man who gets you the supplies you need to sail the high
+                        seas. Focused on client relationships, David looks after our clients and delivers everything
+                        you’ll need to drive your game forward, to be successful and to grow. He’s a point of contact
+                        for clients when they want help, or have questions. With our own teams, David drives us to
+                        deliver world-class experiences and creative excellence for ourselves and our clients. David’s
+                        vast experience in the industry allows him to foresee key products and strategies and to ensure
+                        that we’re all embarking on the correct course.
+                    </p>
+                    <div class="f_social">
+                        <a class="f_social-link js-link-popup" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                viewBox="0 0 10.8 20.946">
+                                <path id="fb"
+                                    d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                    transform="translate(6.703 22.75)" fill="#fff" />
+                            </svg>
+                        </a>
+                        <a href="#" class="f_social-link js-link-popup">
+                            <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                viewBox="0 0 20.946 20.945">
+                                <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                    transform="translate(14.79 3.74)" fill="#fff" />
+                                <path id="Контур_7427" data-name="Контур 7427"
+                                    d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                    transform="translate(-136.458 -24.504)" fill="#fff" />
+                                <path id="Контур_7428" data-name="Контур 7428"
+                                    d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                    transform="translate(-138.465 -26.479)" fill="#fff" />
+                            </svg>
+                        </a>
+                        <a href="#" class="f_social-link js-link-popup">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                viewBox="0 0 20.2 16.625">
+                                <path id="tw"
+                                    d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                    transform="translate(-247.778 -28.021)" fill="#fff" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="leaders__photo">
+                    <img src="http://ipic.su/img/img7/fs/image1.1625228261.jpg" alt="Photo" class="leaders__photo-img">
+                </div>
+            </div>
+        </div>
+        <div class="leaders__slider">
+            <!-- Slider main container -->
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn js-f-btn">
+                                    Read more
+                                </button>
+                                <button class="f_btn f_btn_mobile js-f-btn-mobile">
+                                    Read more
+                                </button>
+                            </div>
 
-        if (chosenDeliveryMethod.val() == METHOD_ZONE_ONE) {
-            chosenDeliveryMethod.attr('data-delivery-price', 150);
-            chosenDeliveryMethod.closest('.t-radio__wrapper-delivery').attr('data-delivery-free', 1000);
-            removeFakeDiscount();
-        } else if (chosenDeliveryMethod.val() == METHOD_ZONE_TWO) {
-            chosenDeliveryMethod.attr('data-delivery-price', 200);
-            chosenDeliveryMethod.closest('.t-radio__wrapper-delivery').attr('data-delivery-free', 1200);
-            removeFakeDiscount();
-        } else if (chosenDeliveryMethod.val() == METHOD_ZONE_THREE) {
-            chosenDeliveryMethod.attr('data-delivery-price', 250);
-            chosenDeliveryMethod.closest('.t-radio__wrapper-delivery').attr('data-delivery-free', 2000);
-            removeFakeDiscount();
-        } else if (chosenDeliveryMethod.val() == METHOD_TAKE_AWAY) {
-            if (window.tcart.prodamount >= 1000) {
-                if (window.tcart.delivery) {
-                    addFakeDiscount((window.tcart.prodamount / 100) * 5, window.tcart.prodamount - ((window.tcart.prodamount / 100) * 5));
-                    if (window.tcart.delivery.freedl > window.tcart.prodamount) {
-                        window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5 + window.tcart.delivery.price;
-                    } else {
-                        window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5;
-                    }
-                } else {
-                    addFakeDiscount((window.tcart.prodamount / 100) * 5, window.tcart.prodamount - ((window.tcart.prodamount / 100) * 5));
-                    window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5;
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn js-f-btn">
+                                    Read more
+                                </button>
+                                <button class="f_btn f_btn_mobile js-f-btn-mobile">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn js-f-btn">
+                                    Read more
+                                </button>
+                                <button class="f_btn f_btn_mobile js-f-btn-mobile">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn js-f-btn">
+                                    Read more
+                                </button>
+                                <button class="f_btn f_btn_mobile js-f-btn-mobile">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn js-f-btn">
+                                    Read more
+                                </button>
+                                <button class="f_btn f_btn_mobile js-f-btn-mobile">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn js-f-btn">
+                                    Read more
+                                </button>
+                                <button class="f_btn f_btn_mobile js-f-btn-mobile">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn js-f-btn">
+                                    Read more
+                                </button>
+                                <button class="f_btn f_btn_mobile js-f-btn-mobile">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class='container'>
+                        <div class='flip_box'>
+                            <div class='front'>
+                                <img src="http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png" alt="Photo"
+                                    class="f_img">
+                                <p class='f_title'>Property insurance</p>
+                                <p class='f_subline'>Pack</p>
+                                <div class="f_social">
+                                    <a class="f_social-link js-link0" href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10.8" height="20.946"
+                                            viewBox="0 0 10.8 20.946">
+                                            <path id="fb"
+                                                d="M2.125-19.273H4.1V-22.6a26.349,26.349,0,0,0-2.872-.147c-2.843,0-4.79,1.735-4.79,4.921V-14.9H-6.7v3.723h3.138V-1.8H.28v-9.368H3.291L3.77-14.9H.28V-17.46C.28-18.536.579-19.273,2.125-19.273Z"
+                                                transform="translate(6.703 22.75)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link1">
+                                        <svg id="inst" xmlns="http://www.w3.org/2000/svg" width="20.946" height="20.945"
+                                            viewBox="0 0 20.946 20.945">
+                                            <circle id="Эллипс_36" data-name="Эллипс 36" cx="1.228" cy="1.228" r="1.228"
+                                                transform="translate(14.79 3.74)" fill="#fff" />
+                                            <path id="Контур_7427" data-name="Контур 7427"
+                                                d="M147.016,29.818a5.158,5.158,0,1,0,5.158,5.158A5.164,5.164,0,0,0,147.016,29.818Zm0,8.463a3.3,3.3,0,1,1,3.3-3.3A3.307,3.307,0,0,1,147.016,38.281Z"
+                                                transform="translate(-136.458 -24.504)" fill="#fff" />
+                                            <path id="Контур_7428" data-name="Контур 7428"
+                                                d="M153.119,47.425h-8.362a6.3,6.3,0,0,1-6.292-6.292V32.771a6.3,6.3,0,0,1,6.292-6.292h8.362a6.3,6.3,0,0,1,6.292,6.292v8.362A6.3,6.3,0,0,1,153.119,47.425Zm-8.362-18.975a4.326,4.326,0,0,0-4.321,4.321v8.362a4.326,4.326,0,0,0,4.321,4.321h8.362a4.326,4.326,0,0,0,4.321-4.321V32.771a4.326,4.326,0,0,0-4.321-4.321Z"
+                                                transform="translate(-138.465 -26.479)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="f_social-link js-link2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="16.625"
+                                            viewBox="0 0 20.2 16.625">
+                                            <path id="tw"
+                                                d="M267.894,30.014a8.339,8.339,0,0,1-2.043.582c.328-.056.812-.65,1-.891a3.758,3.758,0,0,0,.678-1.236c.018-.036.031-.079-.005-.107a.115.115,0,0,0-.107.01A10.465,10.465,0,0,1,265,29.3a.162.162,0,0,1-.167-.045,1.886,1.886,0,0,0-.213-.216,4.252,4.252,0,0,0-1.173-.719,4.09,4.09,0,0,0-1.8-.29,4.3,4.3,0,0,0-1.708.483,4.387,4.387,0,0,0-1.378,1.124,4.251,4.251,0,0,0-.822,1.648,4.439,4.439,0,0,0-.043,1.739c.012.1,0,.109-.084.1a12.936,12.936,0,0,1-8.323-4.236c-.1-.111-.15-.111-.229.008a4.223,4.223,0,0,0,.719,4.986c.163.155.332.31.512.45a4.236,4.236,0,0,1-1.605-.45c-.1-.061-.147-.026-.155.084a2.63,2.63,0,0,0,.026.477,4.271,4.271,0,0,0,2.63,3.4,2.5,2.5,0,0,0,.535.163,4.8,4.8,0,0,1-1.576.048c-.115-.021-.158.036-.115.145a4.431,4.431,0,0,0,3.31,2.772c.15.026.3.026.45.061-.008.013-.018.013-.026.026a5.227,5.227,0,0,1-2.261,1.2,8.091,8.091,0,0,1-3.432.439c-.185-.026-.223-.025-.274,0s-.007.076.053.124c.234.155.474.292.716.424a11.286,11.286,0,0,0,2.294.917,12.221,12.221,0,0,0,11.864-2.774c2.432-2.416,3.284-5.747,3.284-9.082,0-.13.155-.2.246-.272a8,8,0,0,0,1.615-1.68.511.511,0,0,0,.107-.322v-.017C267.978,29.962,267.976,29.976,267.894,30.014Z"
+                                                transform="translate(-247.778 -28.021)" fill="#fff" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <button class="f_btn js-f-btn">
+                                    Read more
+                                </button>
+                                <button class="f_btn f_btn_mobile js-f-btn-mobile">
+                                    Read more
+                                </button>
+                            </div>
+
+                            <div class='back'>
+                                <h3 class='b_headline'>David Mashashvili</h3>
+                                <p class='b_subline'>Creative & Growth Chief</p>
+                                <p class="b_text">
+                                    David is our quartermaster, he’s the man who gets you the supplies you need to sail
+                                    the high seas. Focused on client relationships, David looks after our clients and
+                                    delivers everything you’ll need to drive your game forward, to be successful and to
+                                    grow. He’s a point of contact for clients when they want help, or have questions.
+                                    With our own teams, David drives us to deliver world-class experiences and creative
+                                    excellence for ourselves and our clients. David’s vast experience in the industry
+                                    allows him to foresee key products and strategies and to ensure that we’re all
+                                    embarking on the correct course.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="leaders-btn-wrap">
+                <button type="button" class="leaders-btn-prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23.904" height="18" viewBox="0 0 23.904 18">
+                        <path id="left"
+                            d="M10.477,0A7,7,0,0,1,9,.184,6.992,6.992,0,0,1,7.523,0h0C7.057,2.665,5.064,4.771,3.473,6.069A19.62,19.62,0,0,1,1.031,7.76c-.332.194-.6.339-.773.426l-.2.1L.04,8.3.027,8.3l-.019.009L0,8.314S.273,8.9.653,9.728c.6,1.3.651,1.412.653,1.414l0,0,.008,0,.023-.011.008,0,.069-.034c.05-.024.136-.066.267-.133.3-.155.61-.326.92-.507A22.416,22.416,0,0,0,5.442,8.483,19.088,19.088,0,0,0,7.1,6.959a6.446,6.446,0,0,0,.977-1.293,10.028,10.028,0,0,1-.558,1.293L7.5,23.9h3L10.477,6.959a10.028,10.028,0,0,1-.558-1.293A6.457,6.457,0,0,0,10.9,6.959a19.088,19.088,0,0,0,1.662,1.524A22.416,22.416,0,0,0,15.4,10.449c.31.181.619.352.92.507.131.067.217.109.267.133l.069.034.008,0,.023.011.008,0,0,0s.054-.115.653-1.414c.38-.825.65-1.409.653-1.414l-.008,0L17.973,8.3,17.96,8.3l-.015-.007-.2-.1c-.169-.087-.441-.232-.773-.426a19.62,19.62,0,0,1-2.442-1.691c-1.591-1.3-3.584-3.4-4.049-6.069Z"
+                            transform="translate(0 18) rotate(-90)" fill="#fff" />
+                    </svg>
+                </button>
+                <button type="button" class="leaders-btn-next">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23.904" height="18" viewBox="0 0 23.904 18">
+                        <path id="right"
+                            d="M10.477,23.9A7,7,0,0,0,9,23.719a6.992,6.992,0,0,0-1.477.184h0c-.465-2.665-2.459-4.771-4.049-6.069a19.62,19.62,0,0,0-2.442-1.691C.7,15.95.427,15.8.258,15.718l-.2-.1L.04,15.609.027,15.6l-.019-.009L0,15.59S.273,15,.653,14.176c.6-1.3.651-1.412.653-1.414l0,0,.008,0,.023.011.008,0,.069.034c.05.024.136.066.267.133.3.155.61.326.92.507a22.416,22.416,0,0,1,2.839,1.966A19.088,19.088,0,0,1,7.1,16.945a6.446,6.446,0,0,1,.977,1.293,10.028,10.028,0,0,0-.558-1.293L7.5,0h3l-.024,16.945a10.028,10.028,0,0,0-.558,1.293,6.457,6.457,0,0,1,.977-1.293,19.088,19.088,0,0,1,1.662-1.524A22.416,22.416,0,0,1,15.4,13.455c.31-.181.619-.352.92-.507.131-.067.217-.109.267-.133l.069-.034.008,0,.023-.011.008,0,0,0s.054.115.653,1.414c.38.825.65,1.409.653,1.414l-.008,0-.019.009-.013.006-.015.007-.2.1c-.169.087-.441.232-.773.426a19.62,19.62,0,0,0-2.442,1.691c-1.591,1.3-3.584,3.4-4.049,6.069Z"
+                            transform="translate(0 18) rotate(-90)" fill="#fff" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // Здесь меня инфу о карточках
+        const cards = [
+            {
+                name: "Alexey Pastushenko",
+                subname: "Operations Chief",
+                social: {
+                    fb: "#",
+                    inst: "#",
+                    twitter: "#"
+                },
+                url: "http://ipic.su/img/img7/fs/AlexeyPastushenko3x.1624881193.png",
+                desc: "We need someone to bark out the orders under heavy sail to keep us all towing the line with precision and efficiency and Alexey fits the role to a T. With experience publishing games in over 60 countries, there’s not much Alexey hasn’t seen. His astonishing portfolio of cross-regional partnerships for top publishers like Activision Blizzard and more, includes global projects with PlayStation, Apple, Google, Razer, LEGO, Hasbro, Coca-Cola to name but a few.",
+                popupImage: "http://ipic.su/img/img7/fs/image1.1625228261.jpg"
+            },
+            {
+                name: "Ana Maria Piedrahíta",
+                subname: "Administrative Manager",
+                social: {
+                    fb: "#",
+                    inst: "#",
+                    twitter: "#"
+                },
+                url: "http://ipic.su/img/img7/fs/AnaMariaPiedrahta3x.1624881350.png",
+                desc: "Ana Maria is our shipwright. She keeps us operating together, she ensures the tools and service organizations that the team need to do our jobs are shipshape. Supervising the teams daily support operations, Ana Maria makes sure we all work towards the same goal in as efficient and coordinated manner as possible. She oversees how we work, to make sure we can work. Ana Maria has years of leadership experience in businesses ranging from entrepreneurial environments through to multinational Fortune 100 companies. Outside of the office, she’s visited every country in the Americas and much of Europe and Asia.",
+                popupImage: "http://ipic.su/img/img7/fs/image1.1625228261.jpg"
+            },
+            {
+                name: "David Mashashvili",
+                subname: "Creative & Growth Chief",
+                social: {
+                    fb: "#",
+                    inst: "#",
+                    twitter: "#"
+                },
+                url: "http://ipic.su/img/img7/fs/DavidMashashvili3x.1624881217.png",
+                desc: "David is our quartermaster, he’s the man who gets you the supplies you need to sail the high seas. Focused on client relationships, David looks after our clients and delivers everything you’ll need to drive your game forward, to be successful and to grow. He’s a point of contact for clients when they want help, or have questions. With our own teams, David drives us to deliver world-class experiences and creative excellence for ourselves and our clients. David’s vast experience in the industry allows him to foresee key products and strategies and to ensure that we’re all embarking on the correct course.",
+                popupImage: "http://ipic.su/img/img7/fs/image1.1625228261.jpg"
+            },
+            {
+                name: "Lily Chen",
+                subname: "China Business Development Leader",
+                social: {
+                    fb: "#",
+                    inst: "#",
+                    twitter: "#"
+                },
+                url: "http://ipic.su/img/img7/fs/LilyChen3x.1624881309.png",
+                desc: "Every crew needs a negotiator, and Lily’s our lead deal maker, making us friends and keeping us out of trouble. Lily leads our partnerships with Chinese gaming companies in Opportunity Markets such as MENA, Russia, and Turkey. She is a co-founder of the 100% Group, a company dedicated to excellence in marketing, brand positioning, image creation and more. Lily develops growth strategies, manages client relationships, negotiates with stakeholders and is always on the lookout for new business. Lily’s work keeps our sails full of wind and our business growing.",
+                popupImage: "http://ipic.su/img/img7/fs/image1.1625228261.jpg"
+            },
+            {
+                name: "Mikhail Sketin",
+                subname: "Head of Media, CRM & Data Management",
+                social: {
+                    fb: "#",
+                    inst: "#",
+                    twitter: "#"
+                },
+                url: "http://ipic.su/img/img7/fs/MikhailSketin3x.1624881395.png",
+                desc: "It’s all well and good heading out over the horizon, but someone has to sell your goods. Luckily enough, we’ve got Mikhail. Mikhail has spent over 10 years developing and implementing digital mobile marketing strategies and has won a number of industry awards. Mikhail’s work is critical in ensuring our partners’ success and he has a proven track record in managing Ad tech and MarCom products and maximizing marketing investment performance. Mikhail has deep knowledge of digital advertising and digital project marketing and wide-ranging experience in programmatic marketing and automation.",
+                popupImage: "http://ipic.su/img/img7/fs/image1.1625228261.jpg"
+            },
+            {
+                name: "Nazih Fares",
+                subname: "Head of Communication & Localization",
+                social: {
+                    fb: "#",
+                    inst: "#",
+                    twitter: "#"
+                },
+                url: "http://ipic.su/img/img7/fs/NazihFares3x.1624881164.png",
+                desc: "Every crew needs a translator and communicator, someone who can make connections, and Nazih is that man. An accomplished, award-winning gaming professional with more than 13 years of experience in the gaming industry, Nazih has worked in public relations, localization, marketing and esports for 14 different gaming publishers and more than 90 global brands. Raised across three cultures (Lebanese, French, and Spanish), his love for languages shines through as he tells stories about the power of multiculturalism in gaming. Whatever it is you want to say, Nazih can get your story across.",
+                popupImage: "http://ipic.su/img/img7/fs/image1.1625228261.jpg"
+            },
+            {
+                name: "Steven Huot",
+                subname: "CEO",
+                social: {
+                    fb: "#",
+                    inst: "#",
+                    twitter: "#"
+                },
+                url: "http://ipic.su/img/img7/fs/Steven-Huot3x.1624876831.png",
+                desc: "If we’re a crew, Steve is the captain. With nearly 30 years of experience in the gaming industry, Steve has published over 25 AAA games in global and emerging markets. He cut his teeth on Blizzard Entertainment’s maiden voyage, the world famous, industry-defining World of Warcraft, and has logged over 20 years of experience in leadership at Fortune 500 companies. When you’re setting off for new horizons, you’ll want Steve at the helm.",
+                popupImage: "http://ipic.su/img/img7/fs/image1.1625228261.jpg"
+            },
+            {
+                name: "Ugur Ulger",
+                subname: "Brand & Project Manager",
+                social: {
+                    fb: "#",
+                    inst: "#",
+                    twitter: "#"
+                },
+                url: "http://ipic.su/img/img7/fs/UgurUlger3x.1624881442.png",
+                desc: "When the seas are raging, you need someone with presence on the deck and nobody understands how to keep spirits up than Ugur. Previously a professional esports shoutcaster, Ugur is now a communication professional with over eight years of success in building and increasing brand presence and player engagement. Consistently recognized for his excellence and his contributions to success of several giants of the gaming industry, Ugur has worked for Blizzard Entertainment, Riot Games to name but two. Ugur’s core strengths lie in communication/publishing planning and project management and his expertise in agile coaching.",
+                popupImage: "http://ipic.su/img/img7/fs/image1.1625228261.jpg"
+            }
+        ]
+
+        const loadCards = () => {
+            const cardsName = document.querySelectorAll(".f_title")
+            const cardsSubName = document.querySelectorAll(".f_subline")
+            const cardsImage = document.querySelectorAll(".f_img")
+            const cardslink0 = document.querySelectorAll(".js-link0")
+            const cardslink1 = document.querySelectorAll(".js-link1")
+            const cardslink2 = document.querySelectorAll(".js-link2")
+            const cardsBackName = document.querySelectorAll(".b_headline")
+            const cardsBackSubName = document.querySelectorAll(".b_subline")
+            const cardsBackDesc = document.querySelectorAll(".b_text")
+            const popup = document.querySelector(".js-leaders-popup")
+            const popupBtnToggles = document.querySelectorAll(".js-f-btn")
+            const popupBtnClose = document.querySelector(".js-leaders-popup-close")
+            const popupTitle = document.querySelector(".leaders__box-title")
+            const popupSubtitle = document.querySelector(".leaders__box-subtitle")
+            const popupText = document.querySelector(".leaders__box-text")
+            const popupLinks = document.querySelectorAll(".js-link-popup")
+            const popupImage = document.querySelector(".leaders__photo-img")
+
+            popup.addEventListener("click", (e) => {
+                if (e.target.classList[0] === "leaders__popup") {
+                    popup.classList.toggle("leaders__popup-on")
                 }
-            } else {
-                removeFakeDiscount();
-            }
-
-            delete window.tcart.delivery;
-        } else {
-            delete window.tcart.delivery;
-            removeFakeDiscount();
-        }
-        setTimeout(function () {
-            tcart__reDrawTotal();
-            tcart__updateDelivery();
-        }, 100)
-
-        setTimeout(function () {
-            checkPromocodeLabel();
-        }, 110);
-    }
-
-    //   const checkBirthdayCheckbox = function() {
-    //     let chosenDeliveryMethod = $('[name="Доставка"]:checked');
-
-    //     if (birthdayCheckbox.is(':checked')) {
-    //       if (window.tcart.delivery) {
-    //         addFakeDiscount((window.tcart.prodamount / 100) * 5, window.tcart.prodamount - ((window.tcart.prodamount / 100) * 5));
-    //         if (window.tcart.delivery.freedl > window.tcart.prodamount) {
-    //           window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5 + window.tcart.delivery.price;
-    //         } else {
-    //           window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5;
-    //         }
-    //       } else {
-    //         addFakeDiscount((window.tcart.prodamount / 100) * 5, window.tcart.prodamount - ((window.tcart.prodamount / 100) * 5));
-    //         window.tcart.amount = window.tcart.prodamount - (window.tcart.prodamount / 100) * 5;
-    //       }
-    //     } else {
-    //       if (chosenDeliveryMethod.val() != METHOD_TAKE_AWAY) {
-    //         removeFakeDiscount();
-    //       }
-    //     }
-
-    //     setTimeout(function() {
-    //       tcart__reDrawTotal();
-    //       tcart__updateDelivery();
-    //     }, 100)
-
-    //     setTimeout(function() {
-    //       checkPromocodeLabel();
-    //     }, 110);
-    //   }
-
-    function tcart__addEvents__forProducts() {
-        $(".t706__product-plus").click(function () {
-            tcart__product__plus($(this))
-            checkDeliveryMethod();
-        }),
-            $(".t706__product-minus").click(function () {
-                tcart__product__minus($(this))
-                checkDeliveryMethod();
-            }),
-            $(".t706__product-del").click(function () {
-                tcart__product__del($(this))
-                checkDeliveryMethod();
-            }),
-            $(".t706__product-quantity").click(function () {
-                tcart__product__editquantity($(this))
-                checkDeliveryMethod();
             })
-    }
 
-    function tcart__product__updateQuantity(t, r, o, a) {
-        a > 0 ? (void 0 !== window.tcart.products[o].inv && window.tcart.products[o].inv > 0 && a > window.tcart.products[o].inv && (alert(tcart__dict(13, "Sorry, limit reached, this is the maximum quantity of goods in stock")),
-            a = window.tcart.products[o].inv),
-            window.tcart.products[o].quantity = a,
-            window.tcart.products[o].amount = window.tcart.products[o].price * window.tcart.products[o].quantity,
-            window.tcart.products[o].amount = tcart__roundPrice(window.tcart.products[o].amount),
-            r.find(".t706__product-quantity").html(window.tcart.products[o].quantity),
-            "y" === window.tcart.products[o].single && void 0 !== window.tcart.products[o].portion && r.find(".t706__product-portion").html(tcart__showWeight(window.tcart.products[o].quantity * window.tcart.products[o].portion, window.tcart.products[o].unit)),
-            window.tcart.products[o].amount > 0 ? r.find(".t706__product-amount").html(tcart__showPrice(window.tcart.products[o].amount)) : r.find(".t706__product-amount").html("")) : tcart__product__del(t),
-            tcart__updateTotalProductsinCartObj(),
-            $(".t706__carticon-counter").html(window.tcart.total),
-            tcart__reDrawTotal(),
-            tcart__saveLocalObj(),
-            0 == a && tcart__reDrawProducts()
-        setTimeout(function () {
-            checkDeliveryMethod();
-        }, 200);
-    }
+            popupBtnClose.addEventListener("click", () => {
+                popup.classList.toggle("leaders__popup-on")
+            })
 
+            for (let i = 0; i < cardsName.length; i++) {
+                cardsName[i].innerHTML = cards[i].name
+                cardsSubName[i].innerHTML = cards[i].subname
+                cardsImage[i].setAttribute("src", cards[i].url)
+                cardslink0[i].setAttribute("href", cards[i].social.fb)
+                cardslink1[i].setAttribute("href", cards[i].social.inst)
+                cardslink2[i].setAttribute("href", cards[i].social.twitter)
+                cardsBackName[i].innerHTML = cards[i].name
+                cardsBackSubName[i].innerHTML = cards[i].subname
+                cardsBackDesc[i].innerHTML = cards[i].desc
+                popupBtnToggles[i].addEventListener("click", () => {
+                    popup.classList.toggle("leaders__popup-on")
+                    popupLinks[0].setAttribute("href", cards[i].social.fb)
+                    popupLinks[1].setAttribute("href", cards[i].social.inst)
+                    popupLinks[2].setAttribute("href", cards[i].social.twitter)
+                    popupTitle.innerHTML = cards[i].name
+                    popupSubtitle.innerHTML = cards[i].subname
+                    popupText.innerHTML = cards[i].desc
+                    popupImage.setAttribute("src", cards[i].popupImage)
+                })
+            }
+        }
 
-    $(document).ready(function () {
-        deliveryRadio.on('change', checkDeliveryMethod);
-        // birthdayCheckbox.on('change', checkBirthdayCheckbox);
-    });
+        loadCards()
+        const leaderSlider = new Swiper(".leaders__slider", {
+            spaceBetween: 20,
+            loop: true,
+            slidesPerView: "1",
+            navigation: {
+                nextEl: '.leaders-btn-next',
+                prevEl: '.leaders-btn-prev',
+            },
+            autoplay: {
+                delay: 5000,
+                reverseDirection: true
+            },
+            breakpoints: {
+                1150: {
+                    loop: true,
+                    slidesPerView: "4",
+                    spaceBetween: 20
+                }
+            }
+        })
 
-</script>
+        let leadersCard = document.querySelectorAll(".flip_box")
+        let leadersCardBtn = document.querySelectorAll(".js-f-btn-mobile")
+        let leadersCardBtnBack = document.querySelectorAll(".back")
 
-<style>
-    .t706__cartwin-totalamount-wrap,
-    .t706__cartwin-heading {
-        color: #000;
-    }
-</style>
+        leadersCard.forEach((element, index) => {
+            leadersCardBtn[index].addEventListener("click", () => {
+                leadersCard.forEach(element => {
+                    element.classList.remove("flipped")
+                })
+                element.classList.toggle("flipped")
+            })
+            leadersCardBtnBack[index].addEventListener("click", () => {
+                leadersCard.forEach(element => {
+                    element.classList.remove("flipped")
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>
