@@ -1273,14 +1273,18 @@
                 prevEl: '.leaders-btn-prev',
             },
             autoplay: {
-                delay: 5000,
+                delay: 60000,
                 reverseDirection: true
             },
             breakpoints: {
                 1150: {
                     loop: true,
                     slidesPerView: "4",
-                    spaceBetween: 20
+                    spaceBetween: 20,
+                    autoplay: {
+                        delay: 5000,
+                        reverseDirection: true
+                    },
                 }
             }
         })
