@@ -434,6 +434,10 @@
             background: none;
         }
 
+        .leaders__popup-close:hover svg path {
+            stroke: #fff;
+        }
+
         @media screen and (max-width: 1150px) {
             .leaders__title {
                 font-size: 30px;
@@ -613,7 +617,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <button class="f_btn js-f-btn">
+                                <button class="f_btn js-f-btn" data-index="0">
                                     Read more
                                 </button>
                                 <button class="f_btn f_btn_mobile js-f-btn-mobile">
@@ -677,7 +681,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <button class="f_btn js-f-btn">
+                                <button class="f_btn js-f-btn" data-index="1">
                                     Read more
                                 </button>
                                 <button class="f_btn f_btn_mobile js-f-btn-mobile">
@@ -741,7 +745,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <button class="f_btn js-f-btn">
+                                <button class="f_btn js-f-btn" data-index="2">
                                     Read more
                                 </button>
                                 <button class="f_btn f_btn_mobile js-f-btn-mobile">
@@ -805,7 +809,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <button class="f_btn js-f-btn">
+                                <button class="f_btn js-f-btn" data-index="3">
                                     Read more
                                 </button>
                                 <button class="f_btn f_btn_mobile js-f-btn-mobile">
@@ -869,7 +873,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <button class="f_btn js-f-btn">
+                                <button class="f_btn js-f-btn" data-index="4">
                                     Read more
                                 </button>
                                 <button class="f_btn f_btn_mobile js-f-btn-mobile">
@@ -933,7 +937,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <button class="f_btn js-f-btn">
+                                <button class="f_btn js-f-btn" data-index="5">
                                     Read more
                                 </button>
                                 <button class="f_btn f_btn_mobile js-f-btn-mobile">
@@ -997,7 +1001,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <button class="f_btn js-f-btn">
+                                <button class="f_btn js-f-btn" data-index="6">
                                     Read more
                                 </button>
                                 <button class="f_btn f_btn_mobile js-f-btn-mobile">
@@ -1061,7 +1065,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <button class="f_btn js-f-btn">
+                                <button class="f_btn js-f-btn" data-index="7">
                                     Read more
                                 </button>
                                 <button class="f_btn f_btn_mobile js-f-btn-mobile">
@@ -1221,24 +1225,6 @@
             const cardsBackName = document.querySelectorAll(".b_headline")
             const cardsBackSubName = document.querySelectorAll(".b_subline")
             const cardsBackDesc = document.querySelectorAll(".b_text")
-            const popup = document.querySelector(".js-leaders-popup")
-            const popupBtnToggles = document.querySelectorAll(".js-f-btn")
-            const popupBtnClose = document.querySelector(".js-leaders-popup-close")
-            const popupTitle = document.querySelector(".leaders__box-title")
-            const popupSubtitle = document.querySelector(".leaders__box-subtitle")
-            const popupText = document.querySelector(".leaders__box-text")
-            const popupLinks = document.querySelectorAll(".js-link-popup")
-            const popupImage = document.querySelector(".leaders__photo-img")
-
-            popup.addEventListener("click", (e) => {
-                if (e.target.classList[0] === "leaders__popup") {
-                    popup.classList.toggle("leaders__popup-on")
-                }
-            })
-
-            popupBtnClose.addEventListener("click", () => {
-                popup.classList.toggle("leaders__popup-on")
-            })
 
             for (let i = 0; i < cardsName.length; i++) {
                 cardsName[i].innerHTML = cards[i].name
@@ -1250,16 +1236,6 @@
                 cardsBackName[i].innerHTML = cards[i].name
                 cardsBackSubName[i].innerHTML = cards[i].subname
                 cardsBackDesc[i].innerHTML = cards[i].desc
-                popupBtnToggles[i].addEventListener("click", () => {
-                    popup.classList.toggle("leaders__popup-on")
-                    popupLinks[0].setAttribute("href", cards[i].social.fb)
-                    popupLinks[1].setAttribute("href", cards[i].social.inst)
-                    popupLinks[2].setAttribute("href", cards[i].social.twitter)
-                    popupTitle.innerHTML = cards[i].name
-                    popupSubtitle.innerHTML = cards[i].subname
-                    popupText.innerHTML = cards[i].desc
-                    popupImage.setAttribute("src", cards[i].popupImage)
-                })
             }
         }
 
@@ -1274,7 +1250,7 @@
             },
             autoplay: {
                 delay: 60000,
-                reverseDirection: true
+                reverseDirection: false
             },
             breakpoints: {
                 1150: {
@@ -1283,7 +1259,7 @@
                     spaceBetween: 20,
                     autoplay: {
                         delay: 5000,
-                        reverseDirection: true
+                        reverseDirection: false
                     },
                 }
             }
@@ -1292,6 +1268,25 @@
         let leadersCard = document.querySelectorAll(".flip_box")
         let leadersCardBtn = document.querySelectorAll(".js-f-btn-mobile")
         let leadersCardBtnBack = document.querySelectorAll(".back")
+
+        const popup = document.querySelector(".js-leaders-popup")
+        const popupBtnToggles = document.querySelectorAll(".js-f-btn")
+        const popupBtnClose = document.querySelector(".js-leaders-popup-close")
+        const popupTitle = document.querySelector(".leaders__box-title")
+        const popupSubtitle = document.querySelector(".leaders__box-subtitle")
+        const popupText = document.querySelector(".leaders__box-text")
+        const popupLinks = document.querySelectorAll(".js-link-popup")
+        const popupImage = document.querySelector(".leaders__photo-img")
+
+        popup.addEventListener("click", (e) => {
+            if (e.target.classList[0] === "leaders__popup") {
+                popup.classList.toggle("leaders__popup-on")
+            }
+        })
+
+        popupBtnClose.addEventListener("click", () => {
+            popup.classList.toggle("leaders__popup-on")
+        })
 
         leadersCard.forEach((element, index) => {
             leadersCardBtn[index].addEventListener("click", () => {
@@ -1304,6 +1299,17 @@
                 leadersCard.forEach(element => {
                     element.classList.remove("flipped")
                 })
+            })
+            popupBtnToggles[index].addEventListener("click", () => {
+                popup.classList.toggle("leaders__popup-on")
+                let current = popupBtnToggles[index].getAttribute("data-index")
+                popupLinks[0].setAttribute("href", cards[current].social.fb)
+                popupLinks[1].setAttribute("href", cards[current].social.inst)
+                popupLinks[2].setAttribute("href", cards[current].social.twitter)
+                popupTitle.innerHTML = cards[current].name
+                popupSubtitle.innerHTML = cards[current].subname
+                popupText.innerHTML = cards[current].desc
+                popupImage.setAttribute("src", cards[current].popupImage)
             })
         })
     </script>
